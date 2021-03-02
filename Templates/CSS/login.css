@@ -1,28 +1,49 @@
 body{
-    background-color: #A83D3D;
+    background-color: #540000;
     
 }
 .formclass {
+    height: 10cm;
+    width: 20%;
     border: 3px solid black;
-    display: flex;
-    position: fixed;
     top: 50%;
     left: 50%;
+    position: fixed;
     transform: translate(-50%, -50%);
     align-items: center;
-    background-color: #FFAAAA;
+    justify-content: center;
+    background-color: #F5F5DC;
+  }
+
+  .website{
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      background-color: #540000;
+      color:  #FFFCC7;
+      text-align: center;
+      margin: 10px 10px;
+      font-size: 3em;
+      border: 3px solid brown;
+  }
+ 
+  .wrapper{
+    position: fixed;
+    height: 60%;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    text-align:center;
+
   }
   .container{
       margin: 10px 10px;
-      display:flex;
       justify-content:center;
       text-align: center;
   }
   button{
-      margin: auto;
-      width: 100%;
-      background-color: #D46A6A;
+      margin: 0 auto;
+      width: 75%;
+      background-color: #D1D1A9;
   }
   label{
-      margin: 2px 2px;
+      margin: 5px 5px;
   }
