@@ -1,0 +1,1 @@
+Add navbar to the pages
