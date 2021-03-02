@@ -1,11 +1,18 @@
 body{
-    background-image: url("../IMAGES/coffee.jpg");
-    
+    background-image: url("../IMAGES/coffee.jpg");  
+}
+.layer {
+    background-color:  rgba(255,248,220, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 .formclass {
     height: 10cm;
     width: 20%;
-    border: 3px solid black;
+    border: 5px solid brown;
     top: 50%;
     left: 50%;
     position: fixed;
@@ -16,13 +23,12 @@ body{
   }
 
   .website{
-      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-      background-color: #540000;
-      color:  #FFFCC7;
-      text-align: center;
-      margin: 10px 10px;
-      font-size: 3em;
-      border: 3px solid brown;
+    font-family: 'Dancing Script', cursive;
+    background-color: #540000;
+    color:  #FFFCC7;
+    text-align: center;
+    font-size: 3em;
+    border: 3px solid brown;
   }
  
   .wrapper{
