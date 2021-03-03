@@ -30,7 +30,8 @@ socketIO.on("connection",function(socket){
     socketID=Socket.id;
 });
 
-http.listen(3000,function(){
+const PORT = process.env.PORT || 3000;
+http.listen(PORT,function(){
     console.log("Server Started");
 
     mongodb.MongoClient.connect("mongodb://localhost:27017",{useUnifiedTopology: true },function(error,client){
