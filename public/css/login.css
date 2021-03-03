@@ -19,8 +19,8 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 5cm;
-  font-family: 'Dancing Script', cursive;
+  font-size: 3cm;
+  font-family: 'Optima', sans-serif;
   color:  #FFFCC7;
   
   
@@ -56,7 +56,7 @@ position: relative;
     background-color: #540000;
     color:  #FFFCC7;
     text-align: center;
-    font-size: 3em;
+    font-size: 2em;
     border: 3px solid brown;
   }
  
