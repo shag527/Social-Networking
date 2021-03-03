@@ -4,39 +4,52 @@
         <title>Login</title>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/CSS/login.css">
+        <link rel="stylesheet" type="text/css" href="/css/login.css">
+        <link rel="stylesheet" href="/css/main.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/color.css">
+        <link rel="stylesheet" href="/css/responsive.css">
+
+
     </head>
     <body>
-        <div class="layer">
+        <div class="layer" >
             <div id="col-2">
                 Coffee
             </div>
         <div id="col-1">
         <div class="formclass">
             <div class="website">
-                Coffee
+                Login
             </div>
                 <div class="wrapper">
                     <form action="" method="post"> 
-                        <div class="container">
-                            <label for="uname">Username</label>
-                            <input type="text" placeholder="Username" name="uname" required>
-                        </div>
-                        <div class="container">
-                            <label for="psw">Password</label>
-                            <input type="password" placeholder="Password" name="psw" required>
-                        </div>
-                        <div class="container"></div>
-                            <button type="submit">Login</button>
+                             <div class=" form-group">	
+                                <input type="text" id="input" required="required"/>
+                                <label class="control-label" for="input">Username</label><i class="mtrl-select"></i>
+                             </div>
+                              <div class="form-group">	
+                                <input type="password" required="required"/>
+                                <label class="control-label" for="input">Password</label><i class="mtrl-select"></i>
+                              </div>
+                              <center>
+                                <p style="margin-bottom:1cm;"></p>
+                
+                        
+                        <div class="submit-btns">
+                            <button class="mtr-btn signin" style="background-color:#6f4e37; border: #803a08f5;" type="button"><span>Login</span>
+                            </button></div>
+                        </center>
                         </div>
                     </form>
                     <div class="register">
                         <label>New User?</label>
-                        <a href="register.html">Register!</a>
+                        <a href="register.html" style="color:#540000;"">Register!</a>
                     </div>
                 </div>    
             </div>
         </div>
+    </div>
     </div>
     </body>
 </html>

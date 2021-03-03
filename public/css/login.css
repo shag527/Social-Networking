@@ -15,7 +15,7 @@ body{
   float: left;
   height: 100%;
   z-index: 1010101010;
-  background-color:rgba(165,42,42,0.9);
+  background-color:#6f4e37;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,9 +38,9 @@ position: relative;
   }
 
 .formclass {
-    height: 10cm;
-    width: 40%;
-    border: 5px solid brown;
+    height: 15cm;
+    width: 50%;
+    border: 5px solid #F5F5DCF2;
     top: 50%;
     left: 50%;
     position: absolute;
@@ -65,12 +65,11 @@ position: relative;
     height: 60%;
     width: 100%;
     position: fixed;
-    bottom: 0px;
-    text-align:center;
-
+    bottom: 80px;
+    text-align:left;
   }
   .container{
-      margin: 10px 10px;
+      margin: 15px 10px;
       justify-content:center;
       text-align: center;
   }
@@ -89,3 +88,17 @@ position: relative;
   label{
       margin: 5px 5px;
   }
+
+  .background {
+    background:url('../IMAGES/coffee.jpeg');
+    position: relative;
+}
+
+.layer {
+    background-color: rgba(248, 247, 216, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
