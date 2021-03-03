@@ -16,7 +16,7 @@ var jwt=require("jsonwebtoken");
 const { Socket } = require("dgram");
 var accessTokenSecret="myAccessTokenSecret1234567890";
 
-app.use("/public",express.static(__dirname+"/public"));
+app.use(express.static(__dirname + '/public'));
 app.set("view engine","ejs");
 
 var socketIO=require("socket.io")(http);
@@ -38,8 +38,8 @@ http.listen(3000,function(){
         var database=client.db("my_social_network");
         console.log("Database Connected");
 
-        app.get("/signup",function(request,result){
-            result.render("signup");
+        app.get("/login",function(request,result){
+            result.render("login");
         });
     });
 });
