@@ -1,12 +1,29 @@
 var express=require("express");
 var app=express();
 
-var formidable=require("express-formidable");
-app.use(formidable());
+const {MONGOURI}=require("./config/keys")
+var mongodb=require("mongoose");
+mongodb.connect(MONGOURI,{
+    useNewUrlParser:true,
+    useUnifiedTopology:true
+})
+mongodb.connection.on('connected',()=>{
+    console.log("Database Connected")
+})
+mongodb.connection.on('error',(err)=>{
+    console.log("Error Connecting database",err)
+})
 
-var mongodb=require("mongodb");
-var mongocClient=mongodb.mongocClient;
-var objectId=mongodb.objectId;
+require('./models/user')
+
+app.use(express.json())
+app.use(require("./routes/auth"))
+
+const customMiddleware=(req,res,next)=>{
+    next()
+}
+
+app.use(customMiddleware)
 
 var http=require("http").createServer(app);
 var bcrypt=require("bcrypt");
@@ -14,6 +31,7 @@ var filesystem=require("fs");
 
 var jwt=require("jsonwebtoken");
 const { Socket } = require("dgram");
+const { Mongoose } = require("mongoose");
 var accessTokenSecret="myAccessTokenSecret1234567890";
 
 app.use(express.static(__dirname + '/public'));
@@ -30,18 +48,10 @@ socketIO.on("connection",function(socket){
     socketID=Socket.id;
 });
 
+
+
 const PORT = process.env.PORT || 3000;
-http.listen(PORT,function(){
-    console.log("Server Started");
-
-    mongodb.MongoClient.connect("mongodb://localhost:27017",{useUnifiedTopology: true },function(error,client){
-        if(error) return console.log(error);
-        var database=client.db("my_social_network");
-        console.log("Database Connected");
-
-        app.get("/login",function(request,result){
-            result.render("login");
-        });
-    });
+app.listen(PORT,function(){
+    console.log("Server Started at http://localhost:3000");
 });
 
