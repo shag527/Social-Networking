@@ -4,11 +4,17 @@ const mongoose=require('mongoose')
 const User=mongoose.model("user")
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
+const cookieParser=require('cookie-parser')
 const {JWT_SECRET}=require('../config/keys')
 const requireLogin=require("../middleware/requireLogin")
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-router.get('/',(req,res)=>{
-    res.send("Oops nothing here :(")
+router.use(cookieParser())
+
+router.get('/',requireLogin,(req,res)=>{
+    res.send("Hi User")
 })
 
 router.get('/login',(req,res)=>{
@@ -24,7 +30,7 @@ router.get('/protected',requireLogin,(req,res)=>{
 })
 
 
-router.post('/login',(req,res)=>{
+router.post('/login',urlencodedParser,(req,res)=>{
     const{username,password}=req.body
     if(!username || !password)
     {
@@ -34,7 +40,7 @@ router.post('/login',(req,res)=>{
     .then(savedUser=>{
         if(!savedUser)
         {
-            return res.status(422).json({error:"Invalid email or password"})
+            return res.status(422).json({error:"Invalid username or password"})
         }
         bcrypt.compare(password,savedUser.password)
         .then(doMatch=>{
@@ -42,10 +48,12 @@ router.post('/login',(req,res)=>{
             {
                 //res.json({message:"Successfully logged in"})
                 const token=jwt.sign({id:savedUser._id},JWT_SECRET)
-                res.json({token})
+                const{_id,name,email}=savedUser
+                res.cookie('auth-token','Bearer '+token)
+                return res.redirect('/')
             }
             else{
-                return res.status(422).json({error:"Invalid email or password"})
+                return res.status(422).json({error:"Invalid username or password"})
             }
         })
         .catch(err=>{
@@ -54,12 +62,12 @@ router.post('/login',(req,res)=>{
     })
 })
 
-router.post('/register',(req,res)=>{
+router.post('/register',urlencodedParser,(req,res)=>{
     const {name,dob,email,username,password}=req.body
     if(!name || !dob || !email || !username || !password){
         return res.status(422).json({error:"Please add all the fields"})
     }
-    User.findOne({email:email})
+    User.findOne({email:email}) 
     .then((savedUser)=>{
         if(savedUser){
             return res.status(422).json({error:"User with this email already exists"})
@@ -75,7 +83,7 @@ router.post('/register',(req,res)=>{
             })
             user.save()
             .then(user=>{
-                res.json({message:"Saved Successfully"})
+                return res.redirect('/login')
             })
             .catch(err=>{
                 console.log(err)
