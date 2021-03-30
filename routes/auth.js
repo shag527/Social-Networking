@@ -14,7 +14,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.use(cookieParser())
 
 router.get('/',requireLogin,(req,res)=>{
-    res.send("Hi User")
+    res.render("home");
 })
 
 router.get('/login',(req,res)=>{
@@ -25,8 +25,8 @@ router.get('/register',(req,res)=>{
     res.render("register");
 })
 
-router.get('/protected',requireLogin,(req,res)=>{
-    res.send("Hi")
+router.get('/logout',requireLogin,(req,res)=>{
+    res.render("login");
 })
 
 
