@@ -28,9 +28,6 @@ router.get('/register',(req,res)=>{
 router.get('/logout',requireLogin,(req,res)=>{
     try{
         res.clearCookie("auth-token");
-        console.log("Logout successfully")
-        req.user.save();
-        console.log("Logout successfully")
         res.render("login");
     }catch(error){
         res.status(500).send(error)
