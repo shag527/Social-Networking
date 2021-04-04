@@ -53,7 +53,7 @@ router.post('/login',urlencodedParser,(req,res)=>{
             {
                 //res.json({message:"Successfully logged in"})
                 const token=jwt.sign({id:savedUser._id},JWT_SECRET)
-                const{_id,name,email}=savedUser
+                const{_id,name,email,followers,following}=savedUser
                 res.cookie('auth-token','Bearer '+token)
                 return res.redirect('/')
             }
