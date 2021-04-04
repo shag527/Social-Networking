@@ -4,11 +4,15 @@ const mongoose=require("mongoose")
 const User=mongoose.model("user")
 
 module.exports=(req,res,next)=>{
+    if(!req.cookies['auth-token'])
+    {
+        res.status(401).json({error:"You must be logged in"})
+    }
     const token = req.cookies['auth-token'].replace("Bearer ","")
     if(!token){
         res.status(401).json({error:"You must be logged in"})
     }
-    jwt.verify(token,JWT_SECRET,(err,payload)=>{
+    const user=jwt.verify(token,JWT_SECRET,(err,payload)=>{
         if(err)
         {
             res.status(401).json({error:"You must be logged in"})
@@ -16,6 +20,7 @@ module.exports=(req,res,next)=>{
         const {_id}=payload
         User.findById(_id).then(userdata=>{
             req.user=userdata
+            req.token=token
             next()
         })
     })
