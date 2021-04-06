@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Quattrocento&display=swap');
+
+a{
+  color: black !important;
+}
+
+.brand-logo,h2{
+  font-family: 'Lobster', cursive;;
+}
+.mycard{
+  margin-top: 30px;
+}
+.auth-card{
+  padding: 20px;
+  text-align: center;
+  max-width: 400px;
+  margin: 10px auto;
+}
+
+.gallery{
+  display: flex;
+  flex-wrap: wrap;
+  justify-self: space-around;
+}
+
+.item{
+  width: 32%;
+  margin: 0.5%;
+}
