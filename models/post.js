@@ -17,10 +17,17 @@ const postSchema=new mongoose.Schema({
         type:ObjectId,
         ref:"user"
     }],
+    comments:[{
+        text:String,
+        postedBy:{
+            type:ObjectId,
+            res:"user"
+        }
+    }],
     postedBy:{
         type:ObjectId,
         ref:"user"
     }
-})
+},{timestamps:true})
 
 mongoose.model("post",postSchema)
