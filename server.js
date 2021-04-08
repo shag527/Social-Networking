@@ -14,7 +14,7 @@ mongodb.connection.on('error',(err)=>{
     console.log("Error Connecting database",err)
 })
 
-require('./models/user')
+require('./models/user') 
 require('./models/post')
 
 app.use(express.json())
