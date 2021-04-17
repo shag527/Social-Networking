@@ -27,3 +27,11 @@ a{
   width: 32%;
   margin: 0.5%;
 }
+.home{
+  
+}
+.home-card{
+  margin: 26px auto;
+  max-width: 650px;
+  height: max-content;
+}

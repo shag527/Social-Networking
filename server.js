@@ -14,7 +14,7 @@ mongodb.connection.on('error',(err)=>{
     console.log("Error Connecting database",err)
 })
 
-require('./models/user')
+require('./models/user') 
 require('./models/post')
 
 app.use(express.json())
@@ -51,8 +51,8 @@ socketIO.on("connection",function(socket){
     socketID=Socket.id;
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT,function(){
-    console.log("Server Started at http://localhost:3000");
+    console.log("Server Started at http://localhost:3001");
 });
 
