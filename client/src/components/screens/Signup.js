@@ -1,22 +1,48 @@
 import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
+import M from 'materialize-css'
 
 const Signup = ()=>{
+    const history=useHistory()
     const [username,setUsername] = useState("")
     const [name,setName] = useState("")
     const [email,setEmail] = useState("")
-    const [date,setDate] = useState("")
+    const [dob,setDate] = useState("")
     const [password,setPassword] = useState("")
 
-    const PostData() = ()=>{
-        fetch("http;//localhost:3000/signup",{
+    const PostData= ()=>{
+        if(!username||!name||!email||!dob||!password)
+        {
+            M.toast({html:"Please add all the fields"})
+            return 
+        }
+        if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
+            M.toast({html:"Invalid Email"})
+            return 
+        }
+        fetch("/register",{
             method:"post",
             headers:{
                 "Content-Type":"application/json"
-            }
+            },
             body:JSON.stringify({
-                name:name
+                username,
+                name,
+                email,
+                dob,
+                password
             })
+        }).then(res=>res.json())
+        .then(data=>{
+            if(data.error){
+                M.toast({html:data.error})
+            }
+            else{
+                M.toast({html:data.message})
+                history.push("/signin")
+            }
+        }).catch(err=>{
+            console.log(err)
         })
     }
 
@@ -38,14 +64,14 @@ const Signup = ()=>{
                 onChange = {(e)=>setEmail(e.target.value)}
                 required />
                 <input type="date" placeholder="Date of Birth" name="dob" 
-                value = {date}
+                value = {dob}
                 onChange = {(e)=>setDate(e.target.value)}
                 required />
                 <input type="password" placeholder="Password" name="password" autocomplete="new-password" 
                 value = {password}
                 onChange = {(e)=>setPassword(e.target.value)}
                 required />
-                <input type="submit" value="Register" name="register" class="btn btn-block btn-primary" />
+                <center><button className="btn btn-block btn-primary" onClick={()=>PostData()}>Register</button></center>
             </div>
 
         </div>

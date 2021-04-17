@@ -5,7 +5,7 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './components/screens/Home'
 import Profile from './components/screens/Profile'
 import Signup from './components/screens/Signup'
-import Login from './components/screens/Login'
+import Signin from './components/screens/Signin'
 import CreatePost from './components/screens/CreatePost'
 
 
@@ -16,8 +16,8 @@ function App() {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route path="/login">
-        <Login />
+      <Route path="/signin">
+        <Signin />
       </Route>
       <Route path="/signup">
         <Signup />
@@ -33,23 +33,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

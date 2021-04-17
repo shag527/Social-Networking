@@ -1,6 +1,9 @@
 var express=require("express");
 var app=express();
 
+const cors = require('cors');
+app.use(cors({ origin: true }));
+
 const {MONGOURI}=require("./config/keys")
 var mongodb=require("mongoose");
 mongodb.connect(MONGOURI,{
@@ -56,3 +59,9 @@ app.listen(PORT,function(){
     console.log("Server Started at http://localhost:3001");
 });
 
+app.use((req,res, next)=>{
+    res.setHeader('Access-Control-Allow-Origin',"http://localhost:3000");
+    res.setHeader('Access-Control-Allow-Headers',"*");
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
+});

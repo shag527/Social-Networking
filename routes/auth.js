@@ -7,9 +7,6 @@ const jwt=require('jsonwebtoken')
 const cookieParser=require('cookie-parser')
 const {JWT_SECRET}=require('../config/keys')
 const requireLogin=require("../middleware/requireLogin")
-var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
 const nodemailer=require('nodemailer')
 const crypto=require('crypto')
 const sendgridTransport=require('nodemailer-sendgrid-transport')
@@ -45,7 +42,7 @@ router.get('/logout',requireLogin,(req,res)=>{
 })
 
 
-router.post('/login',urlencodedParser,(req,res)=>{
+router.post('/login',(req,res)=>{
     const{username,password}=req.body
     if(!username || !password)
     {
@@ -64,8 +61,7 @@ router.post('/login',urlencodedParser,(req,res)=>{
                 //res.json({message:"Successfully logged in"})
                 const token=jwt.sign({id:savedUser._id},JWT_SECRET)
                 const{_id,name,email,followers,following}=savedUser
-                res.cookie('auth-token','Bearer '+token)
-                return res.redirect('/')
+                res.json({token,user:{_id,name,email}})
             }
             else{
                 return res.status(422).json({error:"Invalid username or password"})
@@ -77,7 +73,7 @@ router.post('/login',urlencodedParser,(req,res)=>{
     })
 })
 
-router.post('/register',urlencodedParser,(req,res)=>{
+router.post('/register',(req,res)=>{
     const {name,dob,email,username,password}=req.body
     if(!name || !dob || !email || !username || !password){
         return res.status(422).json({error:"Please add all the fields"})
@@ -104,7 +100,7 @@ router.post('/register',urlencodedParser,(req,res)=>{
                     subject:"Signup Success",
                     html:"<h2>Welcome to Coffee!!</h2><h4>Let talk over a cup of coffee.</h4>"
                 })
-                return res.redirect('/login')
+                return res.json({message:"Account created successfully"})
             })
             .catch(err=>{
                 console.log(err)
