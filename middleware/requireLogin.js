@@ -1,14 +1,14 @@
-const jwt=require('jsonwebtoken')
-const {JWT_SECRET}=require('../config/keys')
-const mongoose=require("mongoose")
-const User=mongoose.model("user")
-
-module.exports=(req,res,next)=>{
-    if(!req.cookies['auth-token'])
-    {
-        res.status(401).json({error:"You must be logged in"})
+const jwt = require('jsonwebtoken')
+const {JWT_SECRET} = require('../config/keys')
+const mongoose = require('mongoose')
+const User = mongoose.model("user")
+module.exports = (req,res,next)=>{
+    const {authorization} = req.headers
+    //authorization === Bearer ewefwegwrherhe
+    if(!authorization){
+       return res.status(401).json({error:"you must be logged in"})
     }
-    const token = req.cookies['auth-token'].replace("Bearer ","")
+    const token = authorization.replace("Bearer ","")
     if(!token){
         res.status(401).json({error:"You must be logged in"})
     }
@@ -17,12 +17,11 @@ module.exports=(req,res,next)=>{
         {
             res.status(401).json({error:"You must be logged in"})
         }
-        const {_id}=payload
-        User.findById(_id).then(userdata=>{
+        const { id}=payload
+        User.findById( id).then(userdata=>{
             req.user=userdata
             req.token=token
             next()
         })
     })
-
 }

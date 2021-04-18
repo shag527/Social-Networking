@@ -1,48 +1,100 @@
-import React from 'react'
+import React,{useState,useEffect,useContext} from 'react'
+import {UserContext} from '../../App'
 
 const Home = ()=>{
+    const [data,setData]=useState([])
+    const {state,dispatch}=useContext(UserContext)
+    useEffect(()=>{
+        fetch("http://localhost:3001/allpost",{
+            headers:{
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            }
+        }).then(res=>res.json())
+        .then(result=>{
+            setData(result.posts)
+        })
+    },[])
+
+    const likePost=(id)=>{
+        fetch("http://localhost:3001/like",{
+            method:"put",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                postId:id
+            })
+        }).then(result=>{
+            const newData=data.map(item=>{
+                console.log(item)
+                console.log(result)
+                if(item._id==result._id){
+                    return result
+                }else{
+                    return item
+                }
+            })
+            setData(newData)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const unlikePost=(id)=>{
+        fetch("http://localhost:3001/unlike",{
+            method:"put",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                postId:id
+            })
+        }).then(result=>{
+            const newData=data.map(item=>{
+                if(item._id==result._id){
+                    return result
+                }else{
+                    return item
+                }
+            })
+            setData(newData)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
     return (
         <div className="home">
-            <div className="card home-card">
-                <h5>User Name</h5>
+            {
+                data.map(item=>{
+                    console.log(item)
+                    return(
+                        <div className="card home-card" key={item._id}>
+                <h5>{item.postedBy.name}</h5>
                 <div className="card-image">
-                    <img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1491&q=80"/>
+                    <img src={item.photo}/>
                 </div>
                 <div className="card-content">
-                <i className="material-icons">favorite</i>
-                    <h6>Title</h6>
-                    <p>This was an amazing place</p>
+                <i className="material-icons"  style={{color:"red"}}>favorite</i>
+                {item.likes.includes(state._id)
+                            ? 
+                             <i className="material-icons" onClick={()=>{unlikePost(item._id)}}>thumb_down</i>
+                            : 
+                            <i className="material-icons" onClick={()=>{likePost(item._id)}}>thumb_up</i>
+                            }
+
+                
+                    <h6>{item.likes.length} Likes</h6>
+                    <h6>{item.title}</h6>
+                    <p>{item.body}</p>
                     <input type="text" placeholder="add comment"/>
                 </div>
             </div>
-
-            <div className="card home-card">
-                <h5>User Name</h5>
-                <div className="card-image">
-                    <img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1491&q=80"/>
-                </div>
-                <div className="card-content">
-                <i className="material-icons">favorite</i>
-                    <h6>Title</h6>
-                    <p>This was an amazing place</p>
-                    <input type="text" placeholder="add comment"/>
-                </div>
-            </div>
-
-            <div className="card home-card">
-                <h5>User Name</h5>
-                <div className="card-image">
-                    <img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1491&q=80"/>
-                </div>
-                <div className="card-content">
-                <i className="material-icons">favorite</i>
-                    <h6>Title</h6>
-                    <p>This was an amazing place</p>
-                    <input type="text" placeholder="add comment"/>
-                </div>
-            </div>
-
-
+                    )
+                })
+            }
         </div>
     )
 
