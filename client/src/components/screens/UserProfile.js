@@ -80,7 +80,7 @@ const Profile  = ()=>{
    return (
        <>
        {userProfile ?
-       <div style={{maxWidth:"1250px",margin:"0px auto"}}>
+       <div style={{maxWidth:"1050px",margin:"0px auto"}}>
        <div style={{
            display:"flex",
            justifyContent:"space-around",
@@ -127,7 +127,7 @@ const Profile  = ()=>{
                </div>
            </div>
      
-           <div className="gallery">
+           <div className="gallery grey lighten-3">
                {
                    userProfile.posts.map(item=>{
                        return(

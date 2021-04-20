@@ -62,7 +62,7 @@ const Profile = ()=>{
     }
 
     return (
-       <div style={{maxWidth:"1250px",margin:"0px auto"}}>
+       <div style={{maxWidth:"1050px",margin:"0px auto"}}>
            <div style={{
                display:"flex",
                justifyContent:"space-around",
@@ -95,7 +95,7 @@ const Profile = ()=>{
                    </div>
                </div>
            </div>
-           <did className="gallery">
+           <did className="gallery grey lighten-3">
                {
                    mypics.map(item=>{
                        return(

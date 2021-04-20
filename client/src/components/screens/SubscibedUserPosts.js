@@ -110,7 +110,7 @@ const Home = ()=>{
     }
 
     return (
-        <div className="home">
+        <div className="home grey lighten-3">
             {
                 data.map(item=>{
                     console.log(item)

@@ -60,7 +60,7 @@ const NavBar = ()=>{
     return(
         <nav>
         <div className="nav-wrapper white">
-          <Link to={state?"/subposts":"/signin"} className="brand-logo left">Coffee</Link>
+          <Link to={state?"/subposts":"/signin"} className="brand-logo left">    Coffee</Link>
           <ul id="nav-mobile" className="right">
             {renderList()}
           </ul>
