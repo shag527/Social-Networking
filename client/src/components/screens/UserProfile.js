@@ -5,7 +5,7 @@ const Profile  = ()=>{
     const [userProfile,setProfile] = useState(null)
     const {state,dispatch} = useContext(UserContext)
     const {userid} = useParams()
-    const [showfollow,setShowFollow] = useState(true)
+    const [showfollow,setShowFollow] = useState(state?state.following?!state.following.includes(userid):true:true)
 
     useEffect(()=>{
        fetch(`http://localhost:3001/user/${userid}`,{
@@ -79,7 +79,7 @@ const Profile  = ()=>{
    return (
        <>
        {userProfile ?
-       <div style={{maxWidth:"950px",margin:"0px auto"}}>
+       <div style={{maxWidth:"1250px",margin:"0px auto"}}>
        <div style={{
            display:"flex",
            justifyContent:"space-around",
@@ -88,7 +88,7 @@ const Profile  = ()=>{
        }}>
            <div>
                <img style={{width:"160px",height:"160px",borderRadius:"80px"}}
-               src="https://images.unsplash.com/photo-1535378620166-273708d44e4c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1132&q=80"
+               src={userProfile.user.photo}
                />
                </div>
                <div>
@@ -104,7 +104,7 @@ const Profile  = ()=>{
                    {showfollow?
                    <button style={{
                        margin:"10px"
-                   }} className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                   }} className="btn btn-block btn-primary"
                     onClick={()=>followUser()}
                     >
                         Follow
@@ -114,7 +114,7 @@ const Profile  = ()=>{
                     style={{
                         margin:"10px"
                     }}
-                    className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                    className="btn btn-block btn-primary"
                     onClick={()=>unfollowUser()}
                     >
                         UnFollow

@@ -5,9 +5,8 @@ import{Link} from 'react-router-dom'
 const Home = ()=>{
     const [data,setData]=useState([])
     const {state,dispatch}=useContext(UserContext)
-
     useEffect(()=>{
-        fetch("http://localhost:3001/allpost",{
+        fetch("http://localhost:3001/getsubpost",{
             headers:{
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
             }
@@ -30,10 +29,8 @@ const Home = ()=>{
         }).then(result=>{
             const newData=data.map(item=>{
                 if(item._id==result._id){
-                    window.location.reload()
                     return result
                 }else{
-                    window.location.reload()
                     return item
                 }
             })
@@ -56,10 +53,8 @@ const Home = ()=>{
         }).then(result=>{
             const newData=data.map(item=>{
                 if(item._id==result._id){
-                    window.location.reload()
                     return result
                 }else{
-                    window.location.reload()
                     return item
                 }
             })

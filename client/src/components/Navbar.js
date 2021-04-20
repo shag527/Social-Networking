@@ -9,8 +9,9 @@ const NavBar = ()=>{
     if(state){
       return [
         <li><Link to="/profile">Profile</Link></li>,
-            <li><Link to="/create">Create Post</Link></li>,
-            <li><button className="btn btn-block btn-primary" 
+        <li><Link to="/create">Create Post</Link></li>,
+        <li><Link to="/">Explore</Link></li>,
+        <li><button className="btn btn-block btn-primary" style={{margin:"13px"}}
             onClick={()=>{
               localStorage.clear()
               dispatch({type:"CLEAR"})
@@ -27,7 +28,7 @@ const NavBar = ()=>{
     return(
         <nav>
         <div className="nav-wrapper white">
-          <Link to={state?"/":"/signin"} className="brand-logo left">Coffee</Link>
+          <Link to={state?"/subposts":"/signin"} className="brand-logo left">Coffee</Link>
           <ul id="nav-mobile" className="right">
             {renderList()}
           </ul>

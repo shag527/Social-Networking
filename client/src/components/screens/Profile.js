@@ -1,9 +1,12 @@
 import React,{useEffect,useState,useContext} from 'react'
 import {UserContext} from '../../App'
 
+
 const Profile = ()=>{
     const [mypics,setPics]=useState([])
     const {state,dispatch}=useContext(UserContext)
+    const[image,setImage]=useState("")
+    const[url,setUrl]=useState("")
     useEffect(()=>{
         fetch("http://localhost:3001/mypost",{
             headers:{
@@ -14,8 +17,51 @@ const Profile = ()=>{
             setPics(result.mypost)
         })
     },[])
+
+    useEffect(()=>{
+        if(image){
+        const data=new FormData()
+        data.append("file",image)
+        data.append("upload_preset","social-networking")
+        data.append("cloud_name","fierce-citadel")
+        fetch("https://api.cloudinary.com/v1_1/fierce-citadel/image/upload",{
+            method:"post",
+            body:data
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            //localStorage.setItem("user",JSON.stringify({...state,photo:data.url}))
+            //dispatch({type:"UPDATEPHOTO",payload:data.url})
+            fetch("http://localhost:3001/updatepic",{
+                method  :"put",  
+                headers:{
+                    "Content-Type":"application/json",
+                     "Authorization":"Bearer "+localStorage.getItem("jwt")
+                    },
+                    body:JSON.stringify({
+                        photo:data.url
+                    })
+                }).then(res=>res.json())
+                .then(result=>{
+                    console.log(result)
+                    localStorage.setItem("user",JSON.stringify({...state,photo:result.photo}))
+                    dispatch({type:"UPDATEPHOTO",payload:result.photo})
+                    window.location.reload()
+                })
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+        }
+    },[image])
+    const updatePhoto=(file)=>{
+        setImage(file)
+        
+
+    }
+
     return (
-       <div style={{maxWidth:"950px",margin:"0px auto"}}>
+       <div style={{maxWidth:"1250px",margin:"0px auto"}}>
            <div style={{
                display:"flex",
                justifyContent:"space-around",
@@ -24,12 +70,24 @@ const Profile = ()=>{
            }}>
                <div>
                    <img style={{width:"160px",height:"160px",borderRadius:"80px"}}
-                   src="https://images.unsplash.com/photo-1535378620166-273708d44e4c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1132&q=80"
+                   src={state?state.photo:"Loading..."}
                    />
+
+                <div className="file-field input-field" style={{margin:"5px"}}>
+                <div className="btn">
+                <span>Update Profile</span>
+                <input type="file" onChange={(e)=>updatePhoto(e.target.files[0])}/>
+                </div>
+                <div className="file-path-wrapper">
+                <input className="file-path validate" type="text"/>
+                </div>
+                </div>
+
                </div>
                <div>
                    <h4>{state?state.name:"Loading"}</h4>
-                   <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
+                   <center><h6>{state?state.email:"Loading"}</h6></center>
+                   <div style={{display:"flex",justifyContent:"space-between",width:"108%",margin:"0px 0px 100px 0px"}}>
                        <h6>{mypics.length} posts</h6>
                        <h6>{state?state.followers.length:"Loading..."} followers</h6>
                        <h6>{state?state.following.length:"Loading..."} following</h6>

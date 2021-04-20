@@ -53,6 +53,8 @@ const Signin = ()=>{
                 <center><button className="btn btn-block btn-primary" onClick={()=>PostData()}>Login</button></center>
                 <br></br><br></br>
                 Don't have account yet? <a href="/signup"> Register Here</a>
+                <br></br><br></br>
+                Forgot Password? <a href="/reset"> Click Here</a>
             </div>
             
 
