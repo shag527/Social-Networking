@@ -32,28 +32,28 @@ const Routing = ()=>{
     <Route exact path="/">
     <Home />
     </Route>
-      <Route path="/signin">
+      <Route exact path="/signin">
         <Signin />
       </Route>
-      <Route path="/signup">
+      <Route exact path="/signup">
         <Signup />
       </Route>
       <Route exact path="/profile">
         <Profile />
       </Route>
-      <Route path="/create">
+      <Route exact path="/create">
         <CreatePost />
       </Route>
-      <Route path="/profile/:userid">
+      <Route exact path="/profile/:userid">
         <UserProfile />
       </Route>
-      <Route path="/subposts">
+      <Route exact path="/subposts">
         <SubscribedUserPosts />
       </Route>
       <Route exact path="/reset">
         <Reset />
       </Route>
-      <Route path="/reset/:token">
+      <Route exact path="/reset/:token">
         <NewPassword />
       </Route>
 

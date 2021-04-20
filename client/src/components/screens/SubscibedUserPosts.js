@@ -29,8 +29,10 @@ const Home = ()=>{
         }).then(result=>{
             const newData=data.map(item=>{
                 if(item._id==result._id){
+                    window.location.reload()
                     return result
                 }else{
+                    window.location.reload()
                     return item
                 }
             })
@@ -53,8 +55,10 @@ const Home = ()=>{
         }).then(result=>{
             const newData=data.map(item=>{
                 if(item._id==result._id){
+                    window.location.reload()
                     return result
                 }else{
+                    window.location.reload()
                     return item
                 }
             })

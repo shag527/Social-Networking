@@ -2,6 +2,7 @@ import React,{useEffect,useState,useContext} from 'react'
 import {UserContext} from '../../App'
 import {useParams} from 'react-router-dom'
 const Profile  = ()=>{
+    
     const [userProfile,setProfile] = useState(null)
     const {state,dispatch} = useContext(UserContext)
     const {userid} = useParams()
