@@ -18,8 +18,9 @@ const NavBar = ()=>{
         <li key="1"><i  data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
         <li key="2"><Link to="/profile">Profile</Link></li>,
         <li key="3"><Link to="/create">Create Post</Link></li>,
-        <li key="4"><Link to="/">Explore</Link></li>,
-        <li key="5"><button className="btn btn-block btn-primary" style={{margin:"13px"}}
+        <li key="4"><Link to="/chat">Chat</Link></li>,
+        <li key="5"><Link to="/">Explore</Link></li>,
+        <li key="6"><button className="btn btn-block btn-primary" style={{margin:"13px"}}
             onClick={()=>{
               localStorage.clear()
               dispatch({type:"CLEAR"})

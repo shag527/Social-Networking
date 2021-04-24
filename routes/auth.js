@@ -61,6 +61,7 @@ router.post('/login',(req,res)=>{
                 //res.json({message:"Successfully logged in"})
                 const token=jwt.sign({id:savedUser._id},JWT_SECRET)
                 const{_id,name,email,followers,following,photo}=savedUser
+                console.log(token)
                 res.json({token,user:{_id,name,email,followers,following,photo}})
             }
             else{
