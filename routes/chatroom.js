@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const requireLogin  = require('../middleware/requireLogin')
 const Chatroom=  mongoose.model("Chatroom")
+const Message=  mongoose.model("Message")
 const bodyParser = require("body-parser")
 
 router.post('/chat', requireLogin,async(req,res)=>{
@@ -29,6 +30,19 @@ router.post('/chat', requireLogin,async(req,res)=>{
 router.get('/chat',requireLogin,async(req,res)=>{
     const chatrooms= await Chatroom.find({})
     res.json(chatrooms)
+})
+
+router.post('/allmessages',requireLogin,async(req,res)=>{
+    const {chatroomId}=req.body
+    await Message.find({chatroom:chatroomId})
+    .populate("user","name")
+    .populate("chatroom","name")
+    .then(allmessages=>{
+        res.json({allmessages})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
 })
 
 

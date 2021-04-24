@@ -3,12 +3,13 @@ import {withRouter} from 'react-router-dom'
 import io from 'socket.io-client'
 import M from 'materialize-css'
 import socket from './socket'
+import axios from "axios"
 
 const ChatRoom=({match})=>{
-    var chatroomId=localStorage.getItem("id");
-    chatroomId=chatroomId.slice(1,-1)
+    var chatroomId=match.params.id;
 
     const [messages,setMessages]=useState([])
+    const[allmessages,setAllmessages]=useState([])
     const messageRef=useRef()
 
     const sendMessage=()=>{
@@ -20,6 +21,25 @@ const ChatRoom=({match})=>{
             messageRef.current.value=""
         }
     }
+
+    const getallMessages=()=>{
+        fetch("http://localhost:3001/allmessages",{
+            method:"post",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                chatroomId
+            })
+        }).then(res=>res.json())
+        .then(data=>{
+            setAllmessages(data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
     
     useEffect(()=>{
         if(socket)
@@ -61,7 +81,9 @@ const ChatRoom=({match})=>{
                 <input type="text" name="message" placeholder="Say Something" ref={messageRef}/>
                 <center><button onClick={sendMessage} style={{margin:"30px"}} className="btn btn-block btn-primary">Send</button></center>
                 </div>
-            
+                
+              {/*<center><button onClick={getallMessages} style={{margin:"30px"}} className="btn btn-block btn-primary">Load Previous Messages</button></center>
+            */}
             
 			<br></br>
 			
