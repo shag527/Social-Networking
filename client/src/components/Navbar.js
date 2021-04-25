@@ -15,11 +15,11 @@ const NavBar = ()=>{
   const renderList =()=>{
     if(state){
       return [
-        <li key="1"><i  data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
-        <li key="2"><Link to="/profile">Profile</Link></li>,
-        <li key="3"><Link to="/create">Create Post</Link></li>,
-        <li key="4"><Link to="/chat">Chat</Link></li>,
-        <li key="5"><Link to="/">Explore</Link></li>,
+        <li key="1"><i  data-target="modal1" className="large material-icons modal-trigger" style={{color:"white"}}>search</i></li>,
+        <li key="2"><Link to="/profile" > <h6 style={{color:"white", margin:"20px"}}>Profile</h6></Link></li>,
+        <li key="3"><Link to="/create"><h6 style={{color:"white", margin:"20px"}}>Create Post</h6></Link></li>,
+        <li key="4"><Link to="/chat"><h6 style={{color:"white", margin:"20px"}}>Chat</h6></Link></li>,
+        <li key="5"><Link to="/"><h6 style={{color:"white", margin:"20px"}}>Explore</h6></Link></li>,
         <li key="6"><button className="btn btn-block btn-primary" style={{margin:"13px"}}
             onClick={()=>{
               localStorage.clear()
@@ -29,8 +29,8 @@ const NavBar = ()=>{
       ]
     }else{
       return [
-        <li key="6"><Link to="/signin">Signin</Link></li>,
-        <li key="7"><Link to="/signup">Signup</Link></li>
+        <li key="6"><Link to="/signin"><h6 style={{color:"white", margin:"20px"}}>Signin</h6></Link></li>,
+        <li key="7"><Link to="/signup"><h6 style={{color:"white", margin:"20px"}}>Signup</h6></Link></li>
       ]
     }
   }
@@ -60,8 +60,9 @@ const NavBar = ()=>{
 
     return(
         <nav>
-        <div className="nav-wrapper white">
-          <Link to={state?"/subposts":"/signin"} className="brand-logo left">    Coffee</Link>
+        <div className="nav-wrapper grey darken-4">
+          <Link to={state?"/subposts":"/signin"} className="brand-logo left" style={{margin:"1px"}}> 
+          <h5 style={{color:"white", margin:"20px"}}>Coffee</h5> </Link>
           <ul id="nav-mobile" className="right">
             {renderList()}
           </ul>

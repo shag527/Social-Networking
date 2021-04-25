@@ -38,7 +38,7 @@ a{
   
 }
 .home-card{
-  margin: -10px auto;
+  margin: -1px auto;
   max-width: 650px;
   height: max-content;
 }
@@ -56,3 +56,49 @@ a{
 .material-icons:hover{
   cursor: pointer;
 }
+
+.layer {
+  background-color: rgba(255,248,220, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#col-2{
+  position: relative;
+width: 35%;
+float: left;
+height: 100%;
+z-index: 1010101010;
+background-color:#6f4e37;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 3cm;
+font-family: 'Optima', sans-serif;
+color:  #FFFCC7;
+
+
+
+}
+
+#leftbox {
+  float:left; 
+  background:Red;
+  width:25%;
+  height:280px;
+}
+#middlebox{
+  float:left; 
+  background:Green;
+  width:50%;
+  height:280px;
+}
+#rightbox{
+  float:right;
+  background:blue;
+  width:25%;
+  height:280px;
+}
+

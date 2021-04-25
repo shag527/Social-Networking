@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useContext} from 'react'
-import {UserContext} from '../../App'
+import { UserContext} from '../../App'
 import{Link} from 'react-router-dom'
 
 const Home = ()=>{
@@ -111,7 +111,42 @@ const Home = ()=>{
     }
 
     return (
-        <div className="home grey lighten-3">
+        <div>
+        <div class = "leftbox " style={{float:"left", width:"13%", maxHeight:"max-content"}}>
+              <center>
+              <br></br><br></br>
+                <img style={{width:"160px",height:"160px",borderRadius:"80px"}}
+                   src={state?state.photo:"Loading..."}/>
+               <h3>{state?state.name:"Loading"}</h3> 
+               <br></br>
+               <h6>
+               <Link to="/profile">Profile</Link>
+               <br></br><br></br>
+                <Link to="/create">Post</Link>
+                <br></br><br></br>
+               <Link to="/chat">Chat</Link>
+               <br></br><br></br>
+               <Link to="/">Explore</Link>
+               <br></br><br></br>
+               <Link to="/reset">Reset-Password</Link>
+               <br></br><br></br>
+               </h6>
+               </center>
+        </div>
+        <div className = "grey lighten-3" style={{float:"right", width:"37%", maxHeight:"max-content"}} >
+              <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/hospitals" frameborder="0"></iframe>
+               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/health-it" frameborder="0"></iframe>
+               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/education" frameborder="0"></iframe>
+               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/medical-devices" frameborder="0"></iframe>
+               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/diagnostics" frameborder="0"></iframe>
+               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/ge-bulletin" frameborder="0"></iframe>
+               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/finance" frameborder="0"></iframe>
+               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/insurance" frameborder="0"></iframe>
+               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/people-movement" frameborder="0"></iframe>
+               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/industry" frameborder="0"></iframe>
+
+            </div>
+        <div className="home grey lighten-3" style={{float:"left",width:"47%"}}>
             {
                 data.map(item=>{
                     console.log(item)
@@ -154,6 +189,7 @@ const Home = ()=>{
                     )
                 })
             }
+        </div>
         </div>
     )
 
