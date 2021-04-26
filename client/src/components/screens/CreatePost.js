@@ -66,6 +66,9 @@ const CreatePost = ()=>{
             
         }}
         >
+            <br></br>
+                <h2>Add Story Highlights</h2>
+                <br></br><br></br><br></br>   
             <input type="text" placeholder="title" value={title} onChange={(e)=>setTitle(e.target.value)}/>
             <input type="text" placeholder="body" value={body} onChange={(e)=>setBody(e.target.value)}/>
             <div className="file-field input-field">

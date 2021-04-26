@@ -41,8 +41,8 @@ const Signin = ()=>{
     return (
         <div className="mycard">
             <div className="card auth-card">
-                <h2>Coffee</h2>
-                
+                <h2>Login</h2>
+                <br></br><br></br><br></br>
                 <input type="text" placeholder="User Name" name="username"
                 value = {username}
                 onChange = {(e)=>setUsername(e.target.value)}
@@ -54,7 +54,7 @@ const Signin = ()=>{
                 required />
                 <center><button className="btn btn-block btn-primary" onClick={()=>PostData()}>Login</button></center>
                 <br></br><br></br>
-                Don't have account yet? <a href="/signup"> Register Here</a>
+                Don't have account yet? <Link to="/signup"> Register Here</Link>
                 <br></br><br></br>
                 Forgot Password? <a href="/reset"> Click Here</a>
             </div>

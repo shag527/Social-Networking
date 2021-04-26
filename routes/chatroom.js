@@ -45,6 +45,11 @@ router.post('/allmessages',requireLogin,async(req,res)=>{
     })
 })
 
+router.post('/chatroomname',requireLogin,async(req,res)=>{
+    const chatroomname=await Chatroom.find({chatroom:req.body.roomId})
+    res.json(chatroomname)
+})
+
 
 
 module.exports = router

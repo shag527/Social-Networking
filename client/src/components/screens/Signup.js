@@ -86,8 +86,8 @@ const Signup = ()=>{
     return (
         <div className="mycard">
             <div className="card auth-card">
-                <h2>Coffee</h2>
-                
+                <h2>Register</h2>
+                <br></br><br></br>
                 <input type="text" placeholder="User Name" name="username"
                 value = {username}
                 onChange = {(e)=>setUsername(e.target.value)}

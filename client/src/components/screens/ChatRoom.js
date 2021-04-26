@@ -7,8 +7,10 @@ import axios from "axios"
 
 const ChatRoom=({match})=>{
     var chatroomId=match.params.id;
+    const roomId=chatroomId
 
     const [messages,setMessages]=useState([])
+    const [chatroomname,setChatroomname]=useState()
     const[allmessages,setAllmessages]=useState([])
     const messageRef=useRef()
 
@@ -20,6 +22,25 @@ const ChatRoom=({match})=>{
             })
             messageRef.current.value=""
         }
+    }
+
+    const getchatroomname=()=>{
+        fetch("http://localhost:3001/chatroomname",{
+            method:"post",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                roomId
+            })
+        }).then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            setChatroomname(data)
+        }).catch(err=>{
+            console.log(err)
+        })
     }
 
     const getallMessages=()=>{
@@ -72,7 +93,7 @@ const ChatRoom=({match})=>{
     return (
 		<div className="mycard" style={{ margin:"100px"}}>
             <div className="card auth-card" >
-                <h2>Chatroom Name</h2>
+                <h2>Chat Here</h2>
                 {messages.map((message,i)=>(
                     <center><div key={i} className="mycard auth-card" >{message.name}: {message.message} </div></center>
                 ))}
@@ -81,9 +102,7 @@ const ChatRoom=({match})=>{
                 <input type="text" name="message" placeholder="Say Something" ref={messageRef}/>
                 <center><button onClick={sendMessage} style={{margin:"30px"}} className="btn btn-block btn-primary">Send</button></center>
                 </div>
-                
-              {/*<center><button onClick={getallMessages} style={{margin:"30px"}} className="btn btn-block btn-primary">Load Previous Messages</button></center>
-            */}
+            
             
 			<br></br>
 			

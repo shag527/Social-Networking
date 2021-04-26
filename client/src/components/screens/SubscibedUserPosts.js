@@ -134,19 +134,19 @@ const Home = ()=>{
             </div>
             <div className="grey lighten-3" style={{backgroundColor:"#eeeeee"}}></div>
                
-            <div className = "grey lighten-3" style={{float:"right", width:"37%", maxHeight:"max-content"}} >
-              <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/hospitals" frameborder="0"></iframe>
-               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/health-it" frameborder="0"></iframe>
-               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/education" frameborder="0"></iframe>
-               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/medical-devices" frameborder="0"></iframe>
-               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/diagnostics" frameborder="0"></iframe>
-               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/ge-bulletin" frameborder="0"></iframe>
-               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/finance" frameborder="0"></iframe>
-               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/insurance" frameborder="0"></iframe>
-               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/people-movement" frameborder="0"></iframe>
-               <iframe width="560" height="315" src="https://health.economictimes.indiatimes.com/widget/industry" frameborder="0"></iframe>
+            <div className = "grey lighten-3" style={{float:"right", width:"34%", maxHeight:"max-content"}} >
+            <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/hospitals" frameborder="0"></iframe>
+               <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/health-it" frameborder="0"></iframe>
+               <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/education" frameborder="0"></iframe>
+               <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/medical-devices" frameborder="0"></iframe>
+               <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/diagnostics" frameborder="0"></iframe>
+               <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/ge-bulletin" frameborder="0"></iframe>
+               <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/finance" frameborder="0"></iframe>
+               <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/insurance" frameborder="0"></iframe>
+               <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/people-movement" frameborder="0"></iframe>
+               <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/industry" frameborder="0"></iframe>
             </div>
-        <div className="home grey lighten-3" style={{float:"left",width:"47%"}} >
+        <div className="home grey lighten-3" style={{float:"left",width:"52%"}} >
             {
                 data.map(item=>{
                     return(
