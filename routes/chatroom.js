@@ -10,6 +10,7 @@ router.post('/chat', requireLogin,async(req,res)=>{
     const {chatroomName}=req.body
    
     const nameRegex=/^[A-Za-z\s]+$/
+    
     if(!nameRegex.test(chatroomName))
     return res.status(422).json({error:"Chatroom name can only contain alphabets"})
     
