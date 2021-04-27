@@ -5,7 +5,7 @@ const postSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    body:{
+    body:{ 
         type:Date,
         required:true
     },
@@ -13,10 +13,21 @@ const postSchema=new mongoose.Schema({
         type:String,
         default:"no photo"
     },
+    likes:[{
+        type:ObjectId,
+        ref:"user"
+    }],
+    comments:[{
+        text:String,
+        postedBy:{
+            type:ObjectId,
+            res:"user"
+        }
+    }],
     postedBy:{
         type:ObjectId,
         ref:"user"
     }
-})
+},{timestamps:true})
 
 mongoose.model("post",postSchema)
