@@ -23,9 +23,9 @@ const userSchema=new mongoose.Schema({
     },
     resetToken:String,
     expireToken:Date,
-    profile_pic:{
-        typr:String,
-        default:""
+    photo:{
+        type:String,
+        default:"https://res.cloudinary.com/fierce-citadel/image/upload/v1618863923/no_pic_j6yvol.jpg"
     },
     followers:[{
         type:ObjectId,

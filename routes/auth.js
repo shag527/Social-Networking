@@ -7,9 +7,6 @@ const jwt=require('jsonwebtoken')
 const cookieParser=require('cookie-parser')
 const {JWT_SECRET}=require('../config/keys')
 const requireLogin=require("../middleware/requireLogin")
-var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
 const nodemailer=require('nodemailer')
 const crypto=require('crypto')
 const sendgridTransport=require('nodemailer-sendgrid-transport')
@@ -45,7 +42,7 @@ router.get('/logout',requireLogin,(req,res)=>{
 })
 
 
-router.post('/login',urlencodedParser,(req,res)=>{
+router.post('/login',(req,res)=>{
     const{username,password}=req.body
     if(!username || !password)
     {
@@ -63,9 +60,8 @@ router.post('/login',urlencodedParser,(req,res)=>{
             {
                 //res.json({message:"Successfully logged in"})
                 const token=jwt.sign({id:savedUser._id},JWT_SECRET)
-                const{_id,name,email,followers,following}=savedUser
-                res.cookie('auth-token','Bearer '+token)
-                return res.redirect('/')
+                const{_id,name,email,followers,following,photo}=savedUser
+                res.json({token,user:{_id,name,email,followers,following,photo}})
             }
             else{
                 return res.status(422).json({error:"Invalid username or password"})
@@ -77,8 +73,8 @@ router.post('/login',urlencodedParser,(req,res)=>{
     })
 })
 
-router.post('/register',urlencodedParser,(req,res)=>{
-    const {name,dob,email,username,password}=req.body
+router.post('/register',(req,res)=>{
+    const {name,dob,email,username,password,photo}=req.body
     if(!name || !dob || !email || !username || !password){
         return res.status(422).json({error:"Please add all the fields"})
     }
@@ -94,7 +90,8 @@ router.post('/register',urlencodedParser,(req,res)=>{
                 dob,
                 email,
                 username,
-                password:hashedpassword
+                password:hashedpassword,
+                photo
             })
             user.save()
             .then(user=>{
@@ -104,7 +101,7 @@ router.post('/register',urlencodedParser,(req,res)=>{
                     subject:"Signup Success",
                     html:"<h2>Welcome to Coffee!!</h2><h4>Let talk over a cup of coffee.</h4>"
                 })
-                return res.redirect('/login')
+                return res.json({message:"Account created successfully"})
             })
             .catch(err=>{
                 console.log(err)
@@ -122,10 +119,10 @@ router.post('/reset-password',requireLogin,(req,res)=>{
             console.log(err)
         }
         const token=buffer.toString("hex")
-        user.findOne({email:req.body.email})
+        User.findOne({username:req.body.username})
         .then(user=>{
             if(!user){
-                return res.status(422).json({error:"User don't exist with this email"})
+                return res.status(422).json({error:"No such User"})
             }
             user.resetToken=token
             user.expireToken=Date.now()+3600000
@@ -134,33 +131,38 @@ router.post('/reset-password',requireLogin,(req,res)=>{
                     to:user.email,
                     from:"185027@nith.ac.in",
                     subject:"Password Reset",
-                    html:'<p>You requested for password reset</p>Click this <a href="http://localhost:3000/reset/${token}" >link</a> to reset your password'
+                    html:`
+                     <p>You requested for password reset</p>
+                     <h5>click here <a href="http://localhost:3000/reset/${token}">link</a> to reset password</h5>
+                     `
                 })
-                res.json({message:"Check your email for further instructions"})
+                res.json({message:"Check your email"})
             })
         })
     })
 })
 
 router.post('/new-password',(req,res)=>{
-    const newPassword=req.body.password
-    const sentToken=req.body.token
-    user.findOne({resetToken:sentToken,expireToken:{$gt:Date.now()}})
+    const newPassword = req.body.password
+    const sentToken = req.body.token
+    console.log(sentToken)
+    User.findOne({resetToken:sentToken,expireToken:{$gt:Date.now()}})
     .then(user=>{
         if(!user){
-            return res.status(422).json({error:"Session Expired. Try Again."})
+            return res.status(422).json({error:"Session expired"})
         }
         bcrypt.hash(newPassword,12).then(hashedpassword=>{
-            user.password=hashedpassword
-            user.resetToken=undefined
-            user.expireToken=undefined
-            user.save().then((savedUser)=>{
-                res.json({message:"Password Updated Successfully"})
-            })
+           user.password = hashedpassword
+           user.resetToken = undefined
+           user.expireToken = undefined
+           user.save().then((saveduser)=>{
+               res.json({message:"Password updated successfully"})
+           })
         })
     }).catch(err=>{
         console.log(err)
     })
 })
+
 
 module.exports=router

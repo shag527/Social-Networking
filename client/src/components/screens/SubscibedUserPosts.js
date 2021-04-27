@@ -1,14 +1,12 @@
 import React,{useState,useEffect,useContext} from 'react'
-import { UserContext} from '../../App'
+import {UserContext} from '../../App'
 import{Link} from 'react-router-dom'
-import {Helmet} from "react-helmet";
 
 const Home = ()=>{
     const [data,setData]=useState([])
     const {state,dispatch}=useContext(UserContext)
-
     useEffect(()=>{
-        fetch("http://localhost:3001/allpost",{
+        fetch("http://localhost:3001/getsubpost",{
             headers:{
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
             }
@@ -112,10 +110,10 @@ const Home = ()=>{
     }
 
     return (
-        <div>
-        <div class = "leftbox " style={{float:"left", width:"13%", maxHeight:"max-content"}}>
-              <center>
+        <div className="" style={{maxWidth:"100%"}}>
+            <div class = "leftbox " style={{float:"left", width:"13%", maxHeight:"max-content"}}>
               <br></br><br></br>
+              <center>
                 <img style={{width:"160px",height:"160px",borderRadius:"80px"}}
                    src={state?state.photo:"Loading..."}/>
                <h3>{state?state.name:"Loading"}</h3> 
@@ -132,15 +130,12 @@ const Home = ()=>{
                <Link to="/reset">Reset-Password</Link>
                <br></br><br></br>
                </h6>
-               <Helmet><script
-               src="https://cdn.aisoftware.com/concierge/index.js"
-               id="ais-concierge-script"
-               concierge-token="4e8fe09d-8cef-4af7-8fcd-2bcb8852d4e8"
-               ></script></Helmet>
                </center>
-        </div>
-        <div className = "grey lighten-3" style={{float:"right", width:"34%", maxHeight:"max-content"}} >
-              <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/hospitals" frameborder="0"></iframe>
+            </div>
+            <div className="grey lighten-3" style={{backgroundColor:"#eeeeee"}}></div>
+               
+            <div className = "grey lighten-3" style={{float:"right", width:"34%", maxHeight:"max-content"}} >
+            <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/hospitals" frameborder="0"></iframe>
                <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/health-it" frameborder="0"></iframe>
                <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/education" frameborder="0"></iframe>
                <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/medical-devices" frameborder="0"></iframe>
@@ -150,14 +145,12 @@ const Home = ()=>{
                <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/insurance" frameborder="0"></iframe>
                <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/people-movement" frameborder="0"></iframe>
                <iframe width="530" height="315" src="https://health.economictimes.indiatimes.com/widget/industry" frameborder="0"></iframe>
-
             </div>
-        <div className="home grey lighten-3" style={{float:"left",width:"52%"}}>
+        <div className="home grey lighten-3" style={{float:"left",width:"52%"}} >
             {
                 data.map(item=>{
-                    console.log(item)
                     return(
-                        <div className="card home-card " key={item._id}>
+                        <div className="card home-card" key={item._id}>
                        <h5 style={{padding:"5px"}}><Link to={item.postedBy._id!==state._id?"/profile/"+item.postedBy._id:"/profile"}>{item.postedBy.name}</Link> {item.postedBy._id==state._id &&
                        <i className="material-icons" style={{float:"right"}} onClick={()=>{deletePost(item._id)}}>delete</i>}</h5>
                     <div className="card-image">
@@ -195,7 +188,7 @@ const Home = ()=>{
                     )
                 })
             }
-        </div>
+           </div>
         </div>
     )
 

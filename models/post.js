@@ -6,8 +6,8 @@ const postSchema=new mongoose.Schema({
         required:true
     },
     body:{ 
-        type:Date,
-        required:true
+        type:String,
+        default:""
     },
     photo:{
         type:String,
@@ -21,13 +21,14 @@ const postSchema=new mongoose.Schema({
         text:String,
         postedBy:{
             type:ObjectId,
-            res:"user"
+            ref:"user"
         }
     }],
     postedBy:{
         type:ObjectId,
         ref:"user"
     }
-},{timestamps:true})
+},
+{timestamps:true})
 
-mongoose.model("post",postSchema)
+mongoose.model("Post",postSchema)
