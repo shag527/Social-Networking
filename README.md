@@ -17,7 +17,7 @@ We are living in the age of Social Networking like Facebook, LinkedIn, Google + 
 
 ## Demo
 
-Check Here: yaaak.herokuapp.com/signin
+Check [Here](yaaak.herokuapp.com/signin)
 
 ## Screenshots of the app
 <p align="center">
@@ -44,7 +44,7 @@ Check Here: yaaak.herokuapp.com/signin
 
 ## Quick Installation
 
-```sh
+```
 1. Go to root folder and start server by nodemon start
 2. Go to client folder and start client by npm start
 ```
@@ -58,7 +58,6 @@ You’ll need to have Node 8.16.0 or Node 10.16.0 or later version on your local
 
 By default, the app uses MongoDB hosted on [mLab](https://mlab.com/) and [Cloudinary](https://cloudinary.com/) CDN for hosting images. We have created a demo user for mLab and Cloudinary so you can run the app locally without adding Mongo URL and Cloudinary API Key, however when you start developing your application it is recommended to replace that information with your own, so that everyone has their own Database and CDN.
 
-> Note demo database is being deleted and populated with demo data daily
 
 ### Replacing Mongo URL
 
