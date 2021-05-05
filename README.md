@@ -5,7 +5,6 @@ We are living in the age of Social Networking like Facebook, LinkedIn, Google + 
 
 ## Features
 
-- **Messenger** Real time messaging system.
 - **Posts Feed** Fresh posts from people you are following.
 - **Explore** New Posts and People.
 - **Follow/Unfollow** a particular user and get notified for their activity.
