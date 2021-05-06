@@ -1,6 +1,15 @@
 # Social Networking Website
 ### Semester Project for Software Engineering Lab
 
+
+
+Submitted by: 
+Muskan Khajuria (185005)
+Shagun Katoch (185027)
+Course: CSD-327 Software Engineering LAB
+Date: May 6th, 2021
+Submitted to: Dr. Dharmendra Prasad Mahto
+
 We are living in the age of Social Networking like Facebook, LinkedIn, Google + etc. The objective is to develop a social networking application with various features.
 
 ## Features
